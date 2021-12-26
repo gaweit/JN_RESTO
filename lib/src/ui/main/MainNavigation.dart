@@ -57,10 +57,10 @@ class _MainNavigationState extends State<MainNavigation> {
             Icons.home,
             label: 'Home',
           ),
-          bmnav.BottomNavItem(
-            Icons.assignment,
-            label: 'Kategori',
-          ),
+          // bmnav.BottomNavItem(
+          //   Icons.assignment,
+          //   label: 'Kategori',
+          // ),
           bmnav.BottomNavItem(
             Icons.assignment,
             label: 'Transaksi',
@@ -79,11 +79,11 @@ class _MainNavigationState extends State<MainNavigation> {
       setState(() {
         page = Home();
       });
+      // } else if (i == 1) {
+      //   setState(() {
+      //     page = Kategori();
+      //   });
     } else if (i == 1) {
-      setState(() {
-        page = Kategori();
-      });
-    } else if (i == 2) {
       setState(() {
         page = Transaksi();
       });

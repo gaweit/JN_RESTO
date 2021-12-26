@@ -87,6 +87,9 @@ class _ProdukState extends State {
                             title: Text(data.nama_produk),
                             leading: Icon(Icons.label),
                             trailing: Text(data.kategori),
+                            onTap: () {
+                              print(data.nama_produk);
+                            },
                           ),
                         ),
                       )),
