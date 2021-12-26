@@ -13,6 +13,7 @@ class _KategoriState extends State<Kategori> {
     return MaterialApp(
       home: Scaffold(
         body: MainListView(),
+        backgroundColor: Colors.white,
       ),
     );
   }
@@ -39,8 +40,8 @@ class MainListView extends StatefulWidget {
 }
 
 class MainListViewState extends State {
-  final String apiURL = 'http://127.0.0.1/order-2021-12/api/kategori.php';
-
+  //final String apiURL = 'http://localhost/order-2021-12/api_jnresto/kategori.php';
+  final String apiURL = 'https://jnresto.gaweit.com/api_jnresto/kategori.php';
   Future<List<Kategoridata>> fetchStudents() async {
     var response = await http.get(apiURL);
 
@@ -70,17 +71,17 @@ class MainListViewState extends State {
               .map((data) => Column(
                     children: <Widget>[
                       GestureDetector(
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(20, 5, 0, 5),
-                                  child: Text(data.nama_kategori,
-                                      style: TextStyle(fontSize: 21),
-                                      textAlign: TextAlign.left))
-                            ]),
-                      ),
-                      Divider(color: Colors.black),
+                          child: Card(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 10.0),
+                          child: ListTile(
+                            title: Text(data.nama_kategori),
+                            leading: Icon(Icons.label),
+                          ),
+                        ),
+                      )),
                     ],
                   ))
               .toList(),

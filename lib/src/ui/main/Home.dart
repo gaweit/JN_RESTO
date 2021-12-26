@@ -3,12 +3,11 @@ import 'package:jnresto/src/bloc/ProdukBloc.dart';
 import 'package:jnresto/src/ui/main/Produk.dart';
 
 class Home extends StatefulWidget {
-
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   String kategori = 'all';
 
@@ -29,7 +28,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
   Widget build(BuildContext context) {
     produkBloc.getProduk(kategori);
     return Scaffold(
-        backgroundColor: Colors.grey,
         appBar: AppBar(
           textTheme: TextTheme(),
           backgroundColor: Colors.white,
@@ -50,7 +48,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
             indicatorColor: Colors.white,
             labelColor: Colors.lightBlue[800],
             isScrollable: true,
-            labelPadding: EdgeInsets.only(left: 20.0, right:20.0,),
+            labelPadding: EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+            ),
             unselectedLabelColor: Color(0xFFCDCDCD),
             onTap: _getTabs,
             tabs: [
@@ -110,25 +111,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
               kategori: 'dessert',
             ),
           ],
-        )
-    );
+        ));
   }
 
-  _getTabs(int value){
-    if (value == 0 ){
-      setState((){
+  _getTabs(int value) {
+    if (value == 0) {
+      setState(() {
         kategori = 'all';
       });
-    } else if (value == 1 ){
-      setState((){
+    } else if (value == 1) {
+      setState(() {
         kategori = 'appertizer';
       });
-    } else if (value == 2 ){
-      setState((){
+    } else if (value == 2) {
+      setState(() {
         kategori = 'nasi';
       });
-    } else if (value == 3 ){
-      setState((){
+    } else if (value == 3) {
+      setState(() {
         kategori = 'dessert';
       });
     }

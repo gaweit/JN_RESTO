@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jnresto/src/bloc/ProdukBloc.dart';
 import 'package:jnresto/src/model/ProdukModel.dart';
 import 'package:jnresto/src/ui/widget/produk/ListProduk.dart';
 
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Produk extends StatefulWidget {
@@ -19,38 +18,37 @@ class Produk extends StatefulWidget {
   _ProdukState createState() => _ProdukState();
 }
 
-class _ProdukState extends State<Produk> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: MyGridView(),
-    );
-  }
-}
-
 class Kategoridata {
-  String id_produk, nama_produk, harga;
-  Kategoridata({this.id_produk, this.nama_produk, this.harga});
-  //constructure for class
+  int id_produk;
+  String nama_produk;
+  int harga;
+  String kategori;
+  String gambar;
+
+  Kategoridata(
+      {this.id_produk,
+      this.nama_produk,
+      this.harga,
+      this.kategori,
+      this.gambar});
 
   factory Kategoridata.fromJson(Map<String, dynamic> json) {
     return Kategoridata(
       id_produk: json['id_produk'],
       nama_produk: json['nama_produk'],
       harga: json['harga'],
+      kategori: json['kategori'],
+      gambar: "https://jnresto.gaweit.com/api_jnresto/image/" + json['gambar'],
     );
   }
 }
 
-class MyGridView extends StatefulWidget {
-  @override
-  _MyGridViewState createState() {
-    return _MyGridViewState();
-  }
+class MainListView extends StatefulWidget {
+  _ProdukState createState() => _ProdukState();
 }
 
-class _MyGridViewState extends State<MyGridView> {
-  final String apiURL = 'http://127.0.0.1/order-2021-12/api/produk.php';
+class _ProdukState extends State {
+  final String apiURL = 'https://jnresto.gaweit.com/api_jnresto/produk.php';
   Future<List<Kategoridata>> fetchStudents() async {
     var response = await http.get(apiURL);
 
@@ -67,8 +65,6 @@ class _MyGridViewState extends State<MyGridView> {
     }
   }
 
-  List<Kategoridata> peoplelist; //list array variable for peoples
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Kategoridata>>(
@@ -82,17 +78,18 @@ class _MyGridViewState extends State<MyGridView> {
               .map((data) => Column(
                     children: <Widget>[
                       GestureDetector(
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(20, 5, 0, 5),
-                                  child: Text(data.nama_produk,
-                                      style: TextStyle(fontSize: 21),
-                                      textAlign: TextAlign.left))
-                            ]),
-                      ),
-                      Divider(color: Colors.black),
+                          child: Card(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 10.0),
+                          child: ListTile(
+                            title: Text(data.nama_produk),
+                            leading: Icon(Icons.label),
+                            trailing: Text(data.kategori),
+                          ),
+                        ),
+                      )),
                     ],
                   ))
               .toList(),
