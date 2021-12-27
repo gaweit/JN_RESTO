@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -43,7 +44,7 @@ class MainListView extends StatefulWidget {
 
 class MainListViewState extends State {
   //final String apiURL = 'http://localhost/order-2021-12/api_jnresto/kategori.php';
-  final String apiURL = 'https://jnresto.gaweit.com/api_jnresto/transaksi.php';
+  var apiURL = 'https://jnresto.gaweit.com/api_jnresto/transaksi.php';
   Future<List<Kategoridata>> fetchStudents() async {
     var response = await http.get(apiURL);
 

@@ -1,14 +1,14 @@
+//@dart=2.9
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ListProduk extends StatefulWidget {
-
   String nama_produk;
   String harga;
   String gambar;
   bool isFavorite;
 
-  ListProduk ({
+  ListProduk({
     this.nama_produk,
     this.harga,
     this.gambar,
@@ -30,17 +30,18 @@ class _ListProdukState extends State<ListProduk> {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.only(
         top: 10.0,
         bottom: 5.0,
         left: 15.0,
-        right:15.0,
+        right: 15.0,
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0,),
+          borderRadius: BorderRadius.circular(
+            15.0,
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -55,11 +56,13 @@ class _ListProdukState extends State<ListProduk> {
             Stack(
               children: [
                 Container(
-                  height:120.0,
+                  height: 120.0,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage('http://10.0.2.2/jn_order/public/uploads/img/' + widget.gambar),
+                      image: NetworkImage(
+                          'http://10.0.2.2/jn_order/public/uploads/img/' +
+                              widget.gambar),
                       fit: BoxFit.fill,
                     ),
                     borderRadius: BorderRadius.only(
@@ -77,7 +80,7 @@ class _ListProdukState extends State<ListProduk> {
                         Icon(
                           Icons.favorite,
                           color: Colors.red[600],
-                      )
+                        )
                       else
                         Icon(
                           Icons.favorite_border,
@@ -89,9 +92,9 @@ class _ListProdukState extends State<ListProduk> {
               ],
             ),
             SizedBox(
-              height:7.0,
+              height: 7.0,
             ),
-            Padding (
+            Padding(
               padding: EdgeInsets.only(
                 left: 6.0,
                 right: 6.0,
@@ -126,7 +129,6 @@ class _ListProdukState extends State<ListProduk> {
                 color: Color(0xFFEBEBEB),
                 height: 1.0,
               ),
-
             ),
           ],
         ),

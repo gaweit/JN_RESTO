@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jnresto/src/bloc/ProdukBloc.dart';
@@ -20,6 +21,7 @@ class Produk extends StatefulWidget {
 
 class Kategoridata {
   int id_produk;
+
   String nama_produk;
   int harga;
   String kategori;
@@ -88,7 +90,103 @@ class _ProdukState extends State {
                             leading: Icon(Icons.label),
                             trailing: Text(data.kategori),
                             onTap: () {
-                              print(data.nama_produk);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailData()),
+                              );
+                            },
+                          ),
+                        ),
+                      )),
+                    ],
+                  ))
+              .toList(),
+        );
+      },
+    );
+  }
+}
+
+class DetailData extends StatefulWidget {
+  TransfterDataWidget createState() => TransfterDataWidget();
+}
+
+final String apiURL = 'https://jnresto.gaweit.com/api_jnresto/detailproduk.php';
+Future<List<Kategoridata>> fetchDetail() async {
+  var response = await http.get(apiURL);
+
+  if (response.statusCode == 200) {
+    final items = json.decode(response.body).cast<Map<String, dynamic>>();
+
+    List<Kategoridata> studentList = items.map<Kategoridata>((json) {
+      return Kategoridata.fromJson(json);
+    }).toList();
+
+    return studentList;
+  } else {
+    throw Exception('Failed to load data from Server.');
+  }
+}
+
+class TransfterDataWidget extends State {
+  // Getting value from TextField widget.
+
+  // Boolean variable for CircularProgressIndicator.
+  bool visible = false;
+
+  Future webCall() async {
+    // Showing CircularProgressIndicator using State.
+    setState(() {
+      visible = true;
+    });
+
+    // Showing Alert Dialog with Response JSON.
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          actions: <Widget>[
+            FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Kategoridata>>(
+      future: fetchDetail(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData)
+          return Center(child: CircularProgressIndicator());
+
+        return ListView(
+          children: snapshot.data
+              .map((data) => Column(
+                    children: <Widget>[
+                      GestureDetector(
+                          child: Card(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 10.0),
+                          child: ListTile(
+                            title: Text(data.nama_produk),
+                            leading: Icon(Icons.label),
+                            trailing: Text(data.kategori),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailData()),
+                              );
                             },
                           ),
                         ),

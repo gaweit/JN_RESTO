@@ -1,6 +1,7 @@
+//@dart=2.9
 import 'dart:convert';
 
-List<ProdukModel> produkFromJson(String str){
+List<ProdukModel> produkFromJson(String str) {
   final jsonData = jsonDecode(str);
   return List<ProdukModel>.from(jsonData.map((x) => ProdukModel.fromJson(x)));
 }
@@ -14,15 +15,14 @@ class ProdukModel {
   String kategori;
   String status;
 
-  ProdukModel({
-    this.id_produk,
-    this.nama_produk,
-    this.harga,
-    this.deskripsi,
-    this.gambar,
-    this.kategori,
-    this.status
-  });
+  ProdukModel(
+      {this.id_produk,
+      this.nama_produk,
+      this.harga,
+      this.deskripsi,
+      this.gambar,
+      this.kategori,
+      this.status});
 
   factory ProdukModel.fromJson(Map<String, dynamic> json) => ProdukModel(
         id_produk: json['id_produk'],
