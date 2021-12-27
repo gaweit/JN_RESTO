@@ -25,23 +25,26 @@ class _AkunState extends State<Akun> {
                       InputDecoration(hintText: "Masukkan Username Anda"),
                 ),
                 TextFormField(
+                  obscureText: true,
                   decoration:
-                      InputDecoration(hintText: "Masukkan Username Anda"),
+                      InputDecoration(hintText: "Masukkan Password Anda"),
                 ),
                 ButtonTheme(
+                    minWidth: double.infinity,
                     child: RaisedButton(
-                  onPressed: () {},
-                  child: Text("Login"),
-                )),
+                      onPressed: () {},
+                      child: Text("Login"),
+                    )),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [Text("Belum Punya Akun ?")],
                 ),
                 ButtonTheme(
+                    minWidth: double.infinity,
                     child: RaisedButton(
-                  onPressed: () {},
-                  child: Text("Registrasi"),
-                ))
+                      onPressed: () {},
+                      child: Text("Registrasi"),
+                    ))
               ],
             ),
           )
