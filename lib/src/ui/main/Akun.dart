@@ -72,6 +72,7 @@ class TransfterDataWidget extends State {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final notelpC = TextEditingController();
+  final passlpC = TextEditingController();
 
   // Boolean variable for CircularProgressIndicator.
   bool visible = false;
@@ -86,12 +87,18 @@ class TransfterDataWidget extends State {
     String nama = nameController.text;
     String email = emailController.text;
     String notelp = notelpC.text;
+    String password = passlpC.text;
 
     // API URL
     var url = 'https://jnresto.gaweit.com/api_jnresto/register.php';
 
     // Store all data with Param Name.
-    var data = {'nama': nama, 'email': email, 'no_telp': notelp};
+    var data = {
+      'nama': nama,
+      'email': email,
+      'no_telp': notelp,
+      'password': password
+    };
 
     // Starting Web Call with data.
     var response = await http.post(url, body: json.encode(data));
@@ -161,6 +168,14 @@ class TransfterDataWidget extends State {
                     autocorrect: true,
                     decoration:
                         InputDecoration(hintText: 'Enter Phone Number Here'),
+                  )),
+              Container(
+                  width: 280,
+                  padding: EdgeInsets.all(10.0),
+                  child: TextField(
+                    controller: passlpC,
+                    autocorrect: true,
+                    decoration: InputDecoration(hintText: 'Enter Password'),
                   )),
               RaisedButton(
                 onPressed: webCall,
